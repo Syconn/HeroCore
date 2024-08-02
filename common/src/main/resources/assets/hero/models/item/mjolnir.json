@@ -2,8 +2,8 @@
 	"credit": "Made in Blockbench by Syconn",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "dev models:mjolnir",
-		"particle": "dev models:mjolnir"
+		"0": "hero:item/mjolnir",
+		"particle": "hero:item/mjolnir"
 	},
 	"elements": [
 		{
