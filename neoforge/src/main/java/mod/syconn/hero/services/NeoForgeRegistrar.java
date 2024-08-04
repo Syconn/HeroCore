@@ -1,10 +1,12 @@
-package mod.syconn.hero;
+package mod.syconn.hero.services;
 
+import mod.syconn.hero.HeroNeoForge;
 import mod.syconn.hero.platform.services.IRegistrar;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
@@ -31,6 +33,10 @@ public class NeoForgeRegistrar implements IRegistrar {
 
     public <T extends Item> Supplier<T> registerItem(String id, Supplier<T> item) {
         return HeroNeoForge.ITEMS.register(id, item);
+    }
+
+    public <T extends ArmorMaterial> Supplier<T> registerArmorMaterial(String id, Supplier<T> armorMaterial) {
+        return HeroNeoForge.ARMOR_MATERIALS.register(id, armorMaterial);
     }
 
     public <T extends SoundEvent> Supplier<T> registerSound(String id, Supplier<T> sound) {

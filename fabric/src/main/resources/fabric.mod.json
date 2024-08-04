@@ -20,6 +20,9 @@
         ],
         "client": [
             "mod.syconn.hero.FabricClient"
+        ],
+        "fabric-datagen": [
+            "mod.syconn.hero.FabricData"
         ]
     },
     "mixins": [

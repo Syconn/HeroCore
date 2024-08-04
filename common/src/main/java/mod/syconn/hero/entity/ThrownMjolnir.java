@@ -1,5 +1,7 @@
 package mod.syconn.hero.entity;
 
+import mod.syconn.hero.registrar.EntityRegistrar;
+import mod.syconn.hero.registrar.ItemRegistrar;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,9 +13,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -21,19 +21,20 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class ThrownMjolnir extends AbstractArrow {
+
     private boolean dealtDamage;
     public int clientSideReturnTridentTickCount;
 
-    public ThrownMjolnir(EntityType<? extends ThrownTrident> pEntityType, Level pLevel) {
+    public ThrownMjolnir(EntityType<? extends ThrownMjolnir> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
     public ThrownMjolnir(Level pLevel, LivingEntity pShooter, ItemStack pPickupItemStack) {
-        super(EntityType.TRIDENT, pShooter, pLevel, pPickupItemStack, null);
+        super(EntityRegistrar.MJOLNIR_ENTITY_TYPE.get(), pShooter, pLevel, pPickupItemStack, null);
     }
 
     public ThrownMjolnir(Level pLevel, double pX, double pY, double pZ, ItemStack pPickupItemStack) {
-        super(EntityType.TRIDENT, pX, pY, pZ, pLevel, pPickupItemStack, pPickupItemStack);
+        super(EntityRegistrar.MJOLNIR_ENTITY_TYPE.get(), pX, pY, pZ, pLevel, pPickupItemStack, pPickupItemStack);
     }
 
     public void tick() {
@@ -48,7 +49,6 @@ public class ThrownMjolnir extends AbstractArrow {
                 if (!this.level().isClientSide && this.pickup == AbstractArrow.Pickup.ALLOWED) {
                     this.spawnAtLocation(this.getPickupItem(), 0.1F);
                 }
-
                 this.discard();
             } else {
                 this.setNoPhysics(true);
@@ -132,7 +132,7 @@ public class ThrownMjolnir extends AbstractArrow {
     }
 
     protected ItemStack getDefaultPickupItem() {
-        return new ItemStack(Items.TRIDENT);
+        return new ItemStack(ItemRegistrar.MJOLNIR.get());
     }
 
     protected SoundEvent getDefaultHitGroundSoundEvent() {

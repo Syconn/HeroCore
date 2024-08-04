@@ -21,14 +21,12 @@ public class PlayerModelMixin<T extends LivingEntity> {
         if (!(pEntity instanceof Player player))
             return;
 
-        System.out.println("RUNNING");
-
-        PlayerModel<T> model = (PlayerModel<T>) (Object) this;
-        if (!Minecraft.getInstance().options.getCameraType().isFirstPerson()) {
-            if (player.getItemInHand(InteractionHand.MAIN_HAND).is(ItemRegistrar.MJOLNIR.get())) {
-                model.leftArm.zRot = (float) Math.toRadians(90.0F);
-            }
-        }
+//        PlayerModel<T> model = (PlayerModel<T>) (Object) this;
+//        if (!Minecraft.getInstance().options.getCameraType().isFirstPerson()) {
+//            if (player.getItemInHand(InteractionHand.MAIN_HAND).is(ItemRegistrar.MJOLNIR.get())) {
+//                model.leftArm.zRot = (float) Math.toRadians(90.0F);
+//            }
+//        }
     }
 
     private void copyArmAngles(PlayerModel<T> model){
