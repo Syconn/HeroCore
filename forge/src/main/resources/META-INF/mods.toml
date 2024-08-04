@@ -1,13 +1,13 @@
 modLoader = "javafml"
 loaderVersion = "${forge_loader_version_range}"
 license = "${license}"
-#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+issueTrackerURL="https://github.com/Syconn/HeroCore/issues/new" #optional
 
 [[mods]]
 modId = "${mod_id}"
 version = "${version}"
 displayName = "${mod_name}"
-#updateJSONURL="https://change.me.example.invalid/updates.json" #optional (see https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/)
+updateJSONURL="https://raw.githubusercontent.com/Syconn/Syconn-Mod-Updates/main/HeroCore.json"
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional (displayed in the mod UI)
 logoFile = "${mod_id}.png"
 credits = "${credits}"
