@@ -1,6 +1,7 @@
 package mod.syconn.hero;
 
 import mod.syconn.hero.datagen.LangGen;
+import mod.syconn.hero.services.NeoNetwork;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -21,7 +23,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.concurrent.CompletableFuture;
 
 @Mod(Constants.MOD_ID)
-public class HeroNeoForge {
+public class HeroNeo {
 
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, Constants.MOD_ID);
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Registries.BLOCK, Constants.MOD_ID);
@@ -31,8 +33,10 @@ public class HeroNeoForge {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, Constants.MOD_ID);
     public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, Constants.MOD_ID);
 
-    public HeroNeoForge(IEventBus modEventBus) {
+    public HeroNeo(IEventBus modEventBus) {
         modEventBus.addListener(this::onGatherData);
+        modEventBus.addListener(NeoNetwork::onRegisterPayloadHandler);
+
         SOUND_EVENTS.register(modEventBus);
         BLOCKS.register(modEventBus);
         BLOCK_ENTITIES.register(modEventBus);
@@ -40,6 +44,9 @@ public class HeroNeoForge {
         CREATIVE_TABS.register(modEventBus);
         ITEMS.register(modEventBus);
         ARMOR_MATERIALS.register(modEventBus);
+
+        NeoForge.EVENT_BUS.register(NeoCommon.class);
+
         HeroCore.init();
     }
 

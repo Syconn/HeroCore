@@ -1,6 +1,7 @@
 package mod.syconn.hero;
 
 import mod.syconn.hero.datagen.LangGen;
+import mod.syconn.hero.services.ForgeNetwork;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -34,6 +36,8 @@ public class HeroForge {
     public HeroForge() {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::onGatherData);
+        modEventBus.addListener(ForgeNetwork::setupNetwork);
+
         SOUND_EVENTS.register(modEventBus);
         BLOCKS.register(modEventBus);
         BLOCK_ENTITIES.register(modEventBus);
@@ -41,6 +45,9 @@ public class HeroForge {
         CREATIVE_TABS.register(modEventBus);
         ITEMS.register(modEventBus);
         ARMOR_MATERIALS.register(modEventBus);
+
+        MinecraftForge.EVENT_BUS.register(ForgeCommon.class);
+
         HeroCore.init();
     }
 
