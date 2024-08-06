@@ -1,7 +1,7 @@
 package mod.syconn.hero.network;
 
 import mod.syconn.hero.Constants;
-import mod.syconn.hero.network.messages.MessageSay;
+import mod.syconn.hero.network.messages.MessageLaunch;
 import mod.syconn.hero.network.messages.Payload;
 import mod.syconn.hero.platform.Services;
 import mod.syconn.hero.platform.services.INetwork;
@@ -21,7 +21,7 @@ public class Network {
     public static final ArrayList<PlayMessage<?>> register = new ArrayList<>();
 
     public static void registerMessages() {
-        register.add(PlayMessage.of("say", MessageSay.class, MessageSay.CODEC, MessageSay::handle, PacketFlow.SERVERBOUND));
+        register.add(PlayMessage.of("say", MessageLaunch.class, MessageLaunch.CODEC, MessageLaunch::handle, PacketFlow.SERVERBOUND));
     }
 
     public static void sendToServer(Object message) {

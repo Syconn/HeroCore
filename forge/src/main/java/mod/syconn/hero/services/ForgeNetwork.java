@@ -29,7 +29,7 @@ public class ForgeNetwork implements INetwork {
     }
 
     public <T> void registerPlayC2S(Network.PlayMessage<T> message) {
-
+        CHANNEL.messageBuilder(message.msgClass(), NetworkDirection.PLAY_TO_SERVER).codec(message.forgeCodec()).consumerMainThread((payload, context) -> message.handler().accept(payload, context.getSender())).add();
     }
 
     public static void setupNetwork(FMLCommonSetupEvent event) {
