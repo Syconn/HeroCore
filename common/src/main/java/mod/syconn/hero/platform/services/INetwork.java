@@ -1,10 +1,14 @@
 package mod.syconn.hero.platform.services;
 
-import mod.syconn.hero.network.messages.IPayloadHandler;
+import mod.syconn.hero.network.Network;
 import net.minecraft.server.level.ServerPlayer;
 
 public interface INetwork {
 
-    <T extends IPayloadHandler> void sendToServer(T payload);
-    <T extends IPayloadHandler> void sendToClient(T payload, ServerPlayer serverPlayer);
+    void sendToServer(Object payload);
+    void sendToClient(Object payload, ServerPlayer serverPlayer);
+    <T> void registerPlayS2C(Network.PlayMessage<T> message);
+    <T> void registerPlayC2S(Network.PlayMessage<T> message);
+    default <T> void registerClientHandler(Network.PlayMessage<T> message) {}
+    default <T> void registerServerHandler(Network.PlayMessage<T> message) {}
 }

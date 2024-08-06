@@ -1,11 +1,12 @@
 package mod.syconn.hero.client;
 
 import mod.syconn.hero.client.render.entity.MjolnirRenderer;
+import mod.syconn.hero.network.Network;
+import mod.syconn.hero.network.messages.MessageSay;
 import mod.syconn.hero.registrar.EntityRegistrar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +23,7 @@ public class ClientHandler {
 
     public static void onClientPlayerTick(Player player) {
         if (Minecraft.getInstance().options.keyJump.isDown()) {
-            player.sendSystemMessage(Component.literal("JUMPING"));
+            Network.sendToServer(new MessageSay("HI"));
         }
     }
 }

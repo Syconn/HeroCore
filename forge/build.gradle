@@ -26,7 +26,7 @@ minecraft {
     reobf = false
     copyIdeResources = true
 
-    def at = file('src/main/resources/META-INF/accesstransformer.cfg')
+    def at = file('src/main/resources/accesstransformer.cfg')
     if (at.exists()) {
         accessTransformer = at
     }
