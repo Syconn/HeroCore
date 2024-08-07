@@ -12,7 +12,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.HashMap;
 import java.util.List;
 
-public class ArmorMaterialRegistrar {
+public class ArmorMaterials {
 
     public static final Holder<ArmorMaterial> MARK_42 = Services.REGISTRAR.registerArmorMaterial("mark_42", () -> new ArmorMaterial(new HashMap<>() {{
         put(ArmorItem.Type.BOOTS, 2);

@@ -3,7 +3,6 @@ package mod.syconn.hero.registrar;
 import mod.syconn.hero.Constants;
 import mod.syconn.hero.item.MjolnirItem;
 import mod.syconn.hero.platform.Services;
-import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 
@@ -15,10 +14,10 @@ public class ItemRegistrar {
     public static final Supplier<Item> SHURIKEN = registerItem("shuriken",() -> new Item(new Item.Properties().stacksTo(16)));
     public static final Supplier<Item> GAUNTLET = registerItem("repulsor", () -> new Item(new Item.Properties().stacksTo(1)));
 
-    public static final Supplier<Item> MARK_42_HELMET = registerItem("mark_42_helmet", () -> new ArmorItem(ArmorMaterialRegistrar.MARK_42, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15))));
-    public static final Supplier<Item> MARK_42_CHESTPLATE = registerItem("mark_42_chestplate", () -> new ArmorItem(ArmorMaterialRegistrar.MARK_42, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(15))));
-    public static final Supplier<Item> MARK_42_LEGGINGS = registerItem("mark_42_leggings", () -> new ArmorItem(ArmorMaterialRegistrar.MARK_42, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(15))));
-    public static final Supplier<Item> MARK_42_BOOTS = registerItem("mark_42_boots", () -> new ArmorItem(ArmorMaterialRegistrar.MARK_42, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
+    public static final Supplier<Item> MARK_42_HELMET = registerItem("mark_42_helmet", () -> new ArmorItem(ArmorMaterials.MARK_42, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15))));
+    public static final Supplier<Item> MARK_42_CHESTPLATE = registerItem("mark_42_chestplate", () -> new ArmorItem(ArmorMaterials.MARK_42, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(15))));
+    public static final Supplier<Item> MARK_42_LEGGINGS = registerItem("mark_42_leggings", () -> new ArmorItem(ArmorMaterials.MARK_42, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(15))));
+    public static final Supplier<Item> MARK_42_BOOTS = registerItem("mark_42_boots", () -> new ArmorItem(ArmorMaterials.MARK_42, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
 
     public static final Supplier<Item> INGOT_STEEL = registerItem("ingot_steel", () -> new Item(new Item.Properties().stacksTo(64)));
     public static final Supplier<Item> INGOT_TIN = registerItem("ingot_tin", () -> new Item(new Item.Properties().stacksTo(64)));

@@ -1,5 +1,6 @@
 package mod.syconn.hero;
 
+import mod.syconn.hero.datagen.CommonDatapack;
 import mod.syconn.hero.datagen.LangGen;
 import mod.syconn.hero.services.NeoNetwork;
 import net.minecraft.core.HolderLookup;
@@ -16,10 +17,12 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 @Mod(Constants.MOD_ID)
@@ -56,5 +59,6 @@ public class HeroNeo {
         PackOutput packOutput = generator.getPackOutput();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         generator.addProvider(event.includeServer(), new LangGen(packOutput));
+        generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, CommonDatapack.COMMON, Set.of(Constants.MOD_ID)));
     }
 }

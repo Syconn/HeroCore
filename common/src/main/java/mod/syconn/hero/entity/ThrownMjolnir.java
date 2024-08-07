@@ -33,10 +33,6 @@ public class ThrownMjolnir extends AbstractArrow {
         super(EntityRegistrar.MJOLNIR_ENTITY_TYPE.get(), pShooter, pLevel, pPickupItemStack, null);
     }
 
-    public ThrownMjolnir(Level pLevel, double pX, double pY, double pZ, ItemStack pPickupItemStack) {
-        super(EntityRegistrar.MJOLNIR_ENTITY_TYPE.get(), pX, pY, pZ, pLevel, pPickupItemStack, pPickupItemStack);
-    }
-
     public void tick() {
         if (this.inGroundTime > 4) {
             this.dealtDamage = true;
@@ -45,7 +41,7 @@ public class ThrownMjolnir extends AbstractArrow {
         Entity entity = this.getOwner();
         int speed = 3;
         if ((this.dealtDamage || this.isNoPhysics()) && entity != null) {
-            if (!this.isAcceptibleReturnOwner()) {
+            if (!this.isAcceptableReturnOwner()) {
                 if (!this.level().isClientSide && this.pickup == AbstractArrow.Pickup.ALLOWED) {
                     this.spawnAtLocation(this.getPickupItem(), 0.1F);
                 }
@@ -71,7 +67,7 @@ public class ThrownMjolnir extends AbstractArrow {
         super.tick();
     }
 
-    private boolean isAcceptibleReturnOwner() {
+    private boolean isAcceptableReturnOwner() {
         Entity entity = this.getOwner();
         return entity != null && entity.isAlive() && (!(entity instanceof ServerPlayer) || !entity.isSpectator());
     }
@@ -84,19 +80,12 @@ public class ThrownMjolnir extends AbstractArrow {
         Entity entity = pResult.getEntity();
         float f = 8.0F;
         Entity entity1 = this.getOwner();
-        DamageSource damagesource = this.damageSources().trident(this, (Entity)(entity1 == null ? this : entity1));
-        if (this.level() instanceof ServerLevel serverlevel) {
-            f = EnchantmentHelper.modifyDamage(serverlevel, this.getWeaponItem(), entity, damagesource, f);
-        }
+        DamageSource damagesource = this.level().damageSources().trident(this, (Entity)(entity1 == null ? this : entity1));
 
         this.dealtDamage = true;
         if (entity.hurt(damagesource, f)) {
             if (entity.getType() == EntityType.ENDERMAN) {
                 return;
-            }
-
-            if (this.level() instanceof ServerLevel serverlevel1) {
-                EnchantmentHelper.doPostAttackEffectsWithItemSource(serverlevel1, entity, damagesource, this.getWeaponItem());
             }
 
             if (entity instanceof LivingEntity livingentity) {
@@ -121,6 +110,11 @@ public class ThrownMjolnir extends AbstractArrow {
                 pLevel.getBlockState(pHitResult.getBlockPos()),
                 p_348680_ -> this.kill()
         );
+    }
+
+    protected void onHitBlock(BlockHitResult pResult) {
+        super.onHitBlock(pResult);
+
     }
 
     public ItemStack getWeaponItem() {
@@ -150,25 +144,21 @@ public class ThrownMjolnir extends AbstractArrow {
         this.dealtDamage = pCompound.getBoolean("DealtDamage");
     }
 
-    @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putBoolean("DealtDamage", this.dealtDamage);
     }
 
-    @Override
     public void tickDespawn() {
         if (this.pickup != Pickup.ALLOWED) {
             super.tickDespawn();
         }
     }
 
-    @Override
     protected float getWaterInertia() {
         return 0.99F;
     }
 
-    @Override
     public boolean shouldRender(double pX, double pY, double pZ) {
         return true;
     }
