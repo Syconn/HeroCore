@@ -47,7 +47,6 @@ public class HeroForge {
         ARMOR_MATERIALS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(ForgeCommon.class);
-
         HeroCore.init();
     }
 

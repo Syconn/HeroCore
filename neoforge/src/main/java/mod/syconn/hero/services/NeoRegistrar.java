@@ -2,6 +2,7 @@ package mod.syconn.hero.services;
 
 import mod.syconn.hero.HeroNeo;
 import mod.syconn.hero.platform.services.IRegistrar;
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -35,8 +36,8 @@ public class NeoRegistrar implements IRegistrar {
         return HeroNeo.ITEMS.register(id, item);
     }
 
-    public <T extends ArmorMaterial> Supplier<T> registerArmorMaterial(String id, Supplier<T> armorMaterial) {
-        return HeroNeo.ARMOR_MATERIALS.register(id, armorMaterial);
+    public <T extends ArmorMaterial> Holder<T> registerArmorMaterial(String id, Supplier<T> armorMaterial) {
+        return (Holder<T>) HeroNeo.ARMOR_MATERIALS.register(id, armorMaterial).getDelegate();
     }
 
     public <T extends SoundEvent> Supplier<T> registerSound(String id, Supplier<T> sound) {

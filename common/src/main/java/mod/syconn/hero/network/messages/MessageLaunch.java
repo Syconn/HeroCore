@@ -14,7 +14,8 @@ public record MessageLaunch(boolean setFly) {
             player.getAbilities().flying = true;
             player.onUpdateAbilities();
         } else {
-            player.push(0, 1, 0);
+            player.push(0, 2, 0);
+            player.hurtMarked = true;
         }
     }
 }
