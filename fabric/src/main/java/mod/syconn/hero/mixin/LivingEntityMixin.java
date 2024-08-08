@@ -6,7 +6,6 @@ import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,10 +18,11 @@ public class LivingEntityMixin {
     private void onFall(float fallDistance, float damageMultiplier, CallbackInfoReturnable<Integer> cir) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
         CommonEvent<LivingEntity, Float, Float, Boolean> result = LivingEntityEvents.FALL_EVENT.invoker().fall(livingEntity, fallDistance, damageMultiplier, false);
-        if (livingEntity instanceof Player) System.out.println(result.getResult());
         if (livingEntity.getType().is(EntityTypeTags.FALL_DAMAGE_IMMUNE) || result.getResult()) cir.setReturnValue(0);
-        float f = (float)livingEntity.getAttributeValue(Attributes.SAFE_FALL_DISTANCE);
-        float g = result.getP2() - f;
-        cir.setReturnValue(Mth.ceil((double)(g * result.getP3()) * livingEntity.getAttributeValue(Attributes.FALL_DAMAGE_MULTIPLIER)));
+        else {
+            float f = (float)livingEntity.getAttributeValue(Attributes.SAFE_FALL_DISTANCE);
+            float g = result.getP2() - f;
+            cir.setReturnValue(Mth.ceil((double)(g * result.getP3()) * livingEntity.getAttributeValue(Attributes.FALL_DAMAGE_MULTIPLIER)));
+        }
     }
 }
