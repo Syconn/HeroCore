@@ -1,7 +1,9 @@
 package mod.syconn.hero.entity;
 
+import mod.syconn.hero.registrar.DamageSources;
 import mod.syconn.hero.registrar.EntityRegistrar;
 import mod.syconn.hero.registrar.ItemRegistrar;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -10,6 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -34,6 +37,8 @@ public class ThrownMjolnir extends AbstractArrow {
     }
 
     public void tick() {
+        if (this.isOnFire()) setRemainingFireTicks(0);
+
         if (this.inGroundTime > 4) {
             this.dealtDamage = true;
         }
@@ -80,7 +85,7 @@ public class ThrownMjolnir extends AbstractArrow {
         Entity entity = pResult.getEntity();
         float f = 8.0F;
         Entity entity1 = this.getOwner();
-        DamageSource damagesource = this.level().damageSources().trident(this, (Entity)(entity1 == null ? this : entity1));
+        DamageSource damagesource = DamageSources.mjolnir(this, entity1 == null ? this : entity1);
 
         this.dealtDamage = true;
         if (entity.hurt(damagesource, f)) {
@@ -96,6 +101,7 @@ public class ThrownMjolnir extends AbstractArrow {
 
         this.setDeltaMovement(this.getDeltaMovement().multiply(-0.01, -0.1, -0.01));
         this.playSound(SoundEvents.TRIDENT_HIT, 1.0F, 1.0F);
+        this.strikeLightning(pResult.getEntity().getOnPos());
     }
 
     protected void hitBlockEnchantmentEffects(ServerLevel pLevel, BlockHitResult pHitResult, ItemStack pStack) {
@@ -114,7 +120,16 @@ public class ThrownMjolnir extends AbstractArrow {
 
     protected void onHitBlock(BlockHitResult pResult) {
         super.onHitBlock(pResult);
+        this.strikeLightning(pResult.getBlockPos());
+    }
 
+    private void strikeLightning(BlockPos point) {
+        LightningBolt lightningbolt = EntityType.LIGHTNING_BOLT.create(level());
+        if (lightningbolt != null) {
+            lightningbolt.moveTo(Vec3.atBottomCenterOf(point));
+            lightningbolt.setVisualOnly(false);
+            level().addFreshEntity(lightningbolt);
+        }
     }
 
     public ItemStack getWeaponItem() {
@@ -137,6 +152,10 @@ public class ThrownMjolnir extends AbstractArrow {
         if (this.ownedBy(pEntity) || this.getOwner() == null) {
             super.playerTouch(pEntity);
         }
+    }
+
+    public boolean isReturning() {
+        return dealtDamage;
     }
 
     public void readAdditionalSaveData(CompoundTag pCompound) {

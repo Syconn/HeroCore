@@ -1,6 +1,6 @@
 package mod.syconn.hero;
 
-import mod.syconn.hero.datagen.CommonDatapack;
+import mod.syconn.hero.datagen.DatapackDataGen;
 import mod.syconn.hero.datagen.LangGen;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -10,6 +10,6 @@ public class FabricData implements DataGeneratorEntrypoint {
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
         pack.addProvider(LangGen::new);
-        buildRegistry(CommonDatapack.COMMON);
+        pack.addProvider(DatapackDataGen::new);
     }
 }

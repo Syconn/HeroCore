@@ -21,4 +21,6 @@ public class ArmorMaterials {
         put(ArmorItem.Type.HELMET, 2);
         put(ArmorItem.Type.BODY, 5);
     }}, 9, SoundEvents.ARMOR_EQUIP_IRON, () -> Ingredient.of(ItemRegistrar.TITANIUM_PLATE.get()), List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "mark_42"))),0.0F, 0.0F));
+
+    public static void init() {}
 }

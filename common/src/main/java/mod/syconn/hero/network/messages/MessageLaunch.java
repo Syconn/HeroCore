@@ -10,12 +10,7 @@ public record MessageLaunch(boolean setFly) {
     public static StreamCodec<RegistryFriendlyByteBuf, MessageLaunch> CODEC = StreamCodec.composite(ByteBufCodecs.BOOL, MessageLaunch::setFly, MessageLaunch::new);
 
     public static void handle(MessageLaunch msg, Player player) {
-        if (msg.setFly()) {
-            player.getAbilities().flying = true;
-            player.onUpdateAbilities();
-        } else {
-            player.push(0, 2, 0);
-            player.hurtMarked = true;
-        }
+        player.push(0, 0.5, 0);
+        player.hurtMarked = true;
     }
 }

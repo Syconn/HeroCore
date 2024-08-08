@@ -2,6 +2,7 @@ package mod.syconn.hero;
 
 import mod.syconn.hero.datagen.CommonDatapack;
 import mod.syconn.hero.datagen.LangGen;
+import mod.syconn.hero.registrar.ArmorMaterials;
 import mod.syconn.hero.services.NeoNetwork;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -50,6 +51,7 @@ public class HeroNeo {
 
         NeoForge.EVENT_BUS.register(NeoCommon.class);
 
+        ArmorMaterials.init();
         HeroCore.init();
     }
 

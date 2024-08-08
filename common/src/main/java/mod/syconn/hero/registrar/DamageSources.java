@@ -11,7 +11,7 @@ public class DamageSources {
 
     public static final ResourceKey<DamageType> MJOLNIR = ResourceKey.create(Registries.DAMAGE_TYPE, Constants.loc("mjolnir"));
 
-    public static DamageSource mjolnir(Entity causer) {
-        return new DamageSource(causer.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(MJOLNIR), causer);
+    public static DamageSource mjolnir(Entity causer, Entity thrower) {
+        return new DamageSource(causer.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(MJOLNIR), causer, thrower);
     }
 }

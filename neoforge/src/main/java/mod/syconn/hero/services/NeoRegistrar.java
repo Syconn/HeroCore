@@ -37,7 +37,7 @@ public class NeoRegistrar implements IRegistrar {
     }
 
     public <T extends ArmorMaterial> Holder<T> registerArmorMaterial(String id, Supplier<T> armorMaterial) {
-        return (Holder<T>) HeroNeo.ARMOR_MATERIALS.register(id, armorMaterial).getDelegate();
+        return (Holder<T>) HeroNeo.ARMOR_MATERIALS.register(id, armorMaterial);
     }
 
     public <T extends SoundEvent> Supplier<T> registerSound(String id, Supplier<T> sound) {
