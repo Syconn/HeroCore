@@ -6,11 +6,9 @@ import mod.syconn.hero.platform.Services;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.ArmorType;
 
-import java.util.Properties;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -63,6 +61,6 @@ public class ItemRegistrar {
     }
 
     private static ResourceKey<Item> ItemId(String id) {
-        return ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, id));
+        return ResourceKey.create(Registries.ITEM, Constants.withId(id));
     }
 }

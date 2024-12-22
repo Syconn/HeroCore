@@ -10,7 +10,7 @@ public class Constants {
 	public static final String MOD_NAME = "HeroCore";
 	public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
 
-	public static ResourceLocation loc(String path) {
+	public static ResourceLocation withId(String path) {
 		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
 	}
 }

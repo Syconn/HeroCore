@@ -9,7 +9,7 @@ import net.minecraft.world.entity.Entity;
 
 public class DamageSources {
 
-    public static final ResourceKey<DamageType> MJOLNIR = ResourceKey.create(Registries.DAMAGE_TYPE, Constants.loc("mjolnir"));
+    public static final ResourceKey<DamageType> MJOLNIR = ResourceKey.create(Registries.DAMAGE_TYPE, Constants.withId("mjolnir"));
 
     public static DamageSource mjolnir(Entity causer, Entity thrower) {
         return new DamageSource(causer.level().registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(MJOLNIR), causer, thrower);
