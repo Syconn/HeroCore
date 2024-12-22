@@ -1,8 +1,6 @@
 package mod.syconn.hero;
 
-import mod.syconn.hero.datagen.CommonDatapack;
-import mod.syconn.hero.datagen.LangGen;
-import mod.syconn.hero.registrar.ArmorMaterials;
+import mod.syconn.hero.datagen.*;
 import mod.syconn.hero.services.NeoNetwork;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -10,10 +8,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -29,16 +24,15 @@ import java.util.concurrent.CompletableFuture;
 @Mod(Constants.MOD_ID)
 public class HeroNeo {
 
+    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Constants.MOD_ID);
+    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Constants.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, Constants.MOD_ID);
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Registries.BLOCK, Constants.MOD_ID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE,Constants.MOD_ID);
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, Constants.MOD_ID);
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Constants.MOD_ID);
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, Constants.MOD_ID);
-    public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, Constants.MOD_ID);
 
     public HeroNeo(IEventBus modEventBus) {
-        modEventBus.addListener(this::onGatherData);
+        modEventBus.addListener(this::onGatherClientData);
         modEventBus.addListener(NeoNetwork::onRegisterPayloadHandler);
 
         SOUND_EVENTS.register(modEventBus);
@@ -47,20 +41,21 @@ public class HeroNeo {
         ENTITIES.register(modEventBus);
         CREATIVE_TABS.register(modEventBus);
         ITEMS.register(modEventBus);
-        ARMOR_MATERIALS.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(NeoCommon.class);
-
-        ArmorMaterials.init();
+        
         HeroCore.init();
     }
 
-    private void onGatherData(GatherDataEvent event) {
+    private void onGatherClientData(GatherDataEvent.Client event) {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        generator.addProvider(event.includeServer(), new LangGen(packOutput));
-        generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, CommonDatapack.COMMON, Set.of(Constants.MOD_ID)));
+        generator.addProvider(true, new LangGen(packOutput));
+        generator.addProvider(true, new EquipmentGen(packOutput));
+        generator.addProvider(true, new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, CommonDatapack.COMMON, Set.of(Constants.MOD_ID)));
+        BlockTagGen blockTags = generator.addProvider(true, new BlockTagGen(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(true, new ItemTagGen(packOutput, lookupProvider, blockTags.contentsGetter(), existingFileHelper));
     }
 }

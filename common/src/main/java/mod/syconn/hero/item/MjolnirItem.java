@@ -1,36 +1,34 @@
 package mod.syconn.hero.item;
 
 import mod.syconn.hero.entity.ThrownMjolnir;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class MjolnirItem extends Item implements IUseAnim {
 
     public MjolnirItem(Properties pProperties) {
-        super(pProperties.component(DataComponents.TOOL, Tiers.IRON.createToolProperties(BlockTags.MINEABLE_WITH_PICKAXE)).attributes(SwordItem.createAttributes(Tiers.NETHERITE, 3, -2.4F)));
+        super(ToolMaterial.IRON.applyToolProperties(pProperties, BlockTags.MINEABLE_WITH_PICKAXE, 5, -2.4F));
     }
 
     public int getUseDuration(ItemStack pStack, LivingEntity pEntity) {
         return 72000;
     }
 
-    public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pEntityLiving, int pTimeLeft) {
+    public boolean releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pEntityLiving, int pTimeLeft) {
         if (pEntityLiving instanceof Player player) {
             int i = this.getUseDuration(pStack, pEntityLiving) - pTimeLeft;
             if (i >= 10) {
@@ -58,14 +56,15 @@ public class MjolnirItem extends Item implements IUseAnim {
                     pLevel.playSound(null, player, SoundEvents.TRIDENT_THROW.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
                 }
                 player.awardStat(Stats.ITEM_USED.get(this));
+                return true;
             }
         }
+        return false;
     }
 
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
-        ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        pPlayer.startUsingItem(pHand);
-        return InteractionResultHolder.consume(itemstack);
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+        player.startUsingItem(hand);
+        return InteractionResult.CONSUME;
     }
 
     public UseAnim getAnimation() {

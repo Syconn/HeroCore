@@ -2,6 +2,7 @@ package mod.syconn.hero.mixin;
 
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.entity.state.PlayerRenderState;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
@@ -10,13 +11,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerModel.class)
-public class PlayerModelMixin<T extends LivingEntity> {
+public class PlayerModelMixin {
 
     @SuppressWarnings("all")
-    @Inject(at = @At("TAIL"), method = "setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V")
-    private void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch, CallbackInfo info) {
-        if (!(pEntity instanceof Player player))
-            return;
+    @Inject(at = @At("TAIL"), method = "setupAnim(Lnet/minecraft/client/renderer/entity/state/PlayerRenderState;)V")
+    private void setupAnim(PlayerRenderState renderState, CallbackInfo info) {
+//        if (!(renderState instanceof Player player))
+//            return;
 
 //        PlayerModel<T> model = (PlayerModel<T>) (Object) this;
 //        if (!Minecraft.getInstance().options.getCameraType().isFirstPerson()) {
@@ -26,7 +27,7 @@ public class PlayerModelMixin<T extends LivingEntity> {
 //        }
     }
 
-    private void copyArmAngles(PlayerModel<T> model){
+    private void copyArmAngles(PlayerModel model){
         copyModelAngles(model.rightArm, model.rightSleeve);
         copyModelAngles(model.leftArm, model.leftSleeve);
     }

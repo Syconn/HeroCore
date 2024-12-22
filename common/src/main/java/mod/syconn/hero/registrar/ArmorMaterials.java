@@ -1,26 +1,18 @@
 package mod.syconn.hero.registrar;
 
-import mod.syconn.hero.Constants;
-import mod.syconn.hero.platform.Services;
-import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class ArmorMaterials {
 
-    public static final Holder<ArmorMaterial> MARK_42 = Services.REGISTRAR.registerArmorMaterial("mark_42", () -> new ArmorMaterial(new HashMap<>() {{
-        put(ArmorItem.Type.BOOTS, 2);
-        put(ArmorItem.Type.LEGGINGS, 5);
-        put(ArmorItem.Type.CHESTPLATE, 6);
-        put(ArmorItem.Type.HELMET, 2);
-        put(ArmorItem.Type.BODY, 5);
-    }}, 9, SoundEvents.ARMOR_EQUIP_IRON, () -> Ingredient.of(ItemRegistrar.TITANIUM_PLATE.get()), List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "mark_42"))),0.0F, 0.0F));
-
-    public static void init() {}
+    public static final ArmorMaterial MARK_42 = new ArmorMaterial(15, new HashMap<>() {{
+        put(ArmorType.BOOTS, 2);
+        put(ArmorType.LEGGINGS, 5);
+        put(ArmorType.CHESTPLATE, 6);
+        put(ArmorType.HELMET, 2);
+        put(ArmorType.BODY, 5);
+    }}, 9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, TagRegistrar.TITANIUM_PLATE, TagRegistrar.MARK_42);
 }

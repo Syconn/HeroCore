@@ -10,10 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LightningBolt;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
@@ -47,8 +44,8 @@ public class ThrownMjolnir extends AbstractArrow {
         int speed = 3;
         if ((this.dealtDamage || this.isNoPhysics()) && entity != null) {
             if (!this.isAcceptableReturnOwner()) {
-                if (!this.level().isClientSide && this.pickup == AbstractArrow.Pickup.ALLOWED) {
-                    this.spawnAtLocation(this.getPickupItem(), 0.1F);
+                if (this.level() instanceof ServerLevel sl && this.pickup == AbstractArrow.Pickup.ALLOWED) {
+                    this.spawnAtLocation(sl, this.getPickupItem(), 0.1F);
                 }
                 this.discard();
             } else {
@@ -88,7 +85,7 @@ public class ThrownMjolnir extends AbstractArrow {
         DamageSource damagesource = DamageSources.mjolnir(this, entity1 == null ? this : entity1);
 
         this.dealtDamage = true;
-        if (entity.hurt(damagesource, f)) {
+        if (entity.hurtOrSimulate(damagesource, f)) {
             if (entity.getType() == EntityType.ENDERMAN) {
                 return;
             }
@@ -114,7 +111,7 @@ public class ThrownMjolnir extends AbstractArrow {
                 null,
                 vec3,
                 pLevel.getBlockState(pHitResult.getBlockPos()),
-                p_348680_ -> this.kill()
+                p_348680_ -> this.kill(pLevel)
         );
     }
 
@@ -124,7 +121,7 @@ public class ThrownMjolnir extends AbstractArrow {
     }
 
     private void strikeLightning(BlockPos point) {
-        LightningBolt lightningbolt = EntityType.LIGHTNING_BOLT.create(level());
+        LightningBolt lightningbolt = EntityType.LIGHTNING_BOLT.create(level(), EntitySpawnReason.TRIGGERED);
         if (lightningbolt != null) {
             lightningbolt.moveTo(Vec3.atBottomCenterOf(point));
             lightningbolt.setVisualOnly(false);

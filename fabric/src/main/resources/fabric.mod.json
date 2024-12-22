@@ -16,13 +16,7 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-          "mod.syconn.hero.HeroFabric"
-        ],
-        "client": [
-            "mod.syconn.hero.FabricClient"
-        ],
-        "fabric-datagen": [
-            "mod.syconn.hero.FabricData"
+            "com.example.examplemod.ExampleMod"
         ]
     },
     "mixins": [
