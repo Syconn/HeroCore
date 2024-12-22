@@ -1,6 +1,7 @@
 package mod.syconn.hero.datagen;
 
 import net.minecraft.world.item.Item;
+
 import java.util.function.BiConsumer;
 
 import static mod.syconn.hero.registrar.ItemRegistrar.*;
