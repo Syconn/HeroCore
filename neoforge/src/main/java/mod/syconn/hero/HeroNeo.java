@@ -55,6 +55,7 @@ public class HeroNeo {
         generator.addProvider(true, new LangGen(packOutput));
         generator.addProvider(true, new EquipmentGen(packOutput));
         generator.addProvider(true, new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, CommonDatapack.COMMON, Set.of(Constants.MOD_ID)));
+        generator.addProvider(true, new ItemModelGen(packOutput, existingFileHelper));
         BlockTagGen blockTags = generator.addProvider(true, new BlockTagGen(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(true, new ItemTagGen(packOutput, lookupProvider, blockTags.contentsGetter(), existingFileHelper));
     }

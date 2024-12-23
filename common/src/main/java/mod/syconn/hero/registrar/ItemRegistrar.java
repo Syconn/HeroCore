@@ -33,13 +33,10 @@ public class ItemRegistrar {
             .icon(() -> new ItemStack(MJOLNIR.get()))
             .displayItems((enabledFeatures, entries) -> {
                 entries.accept(MJOLNIR.get());
-                entries.accept(SHURIKEN.get());
-                entries.accept(GAUNTLET.get());
                 entries.accept(MARK_42_HELMET.get());
                 entries.accept(MARK_42_CHESTPLATE.get());
                 entries.accept(MARK_42_LEGGINGS.get());
                 entries.accept(MARK_42_BOOTS.get());
-                entries.accept(ARC_REACTOR.get());
                 entries.accept(INGOT_STEEL.get());
                 entries.accept(INGOT_TIN.get());
                 entries.accept(TITANIUM_PLATE.get());
