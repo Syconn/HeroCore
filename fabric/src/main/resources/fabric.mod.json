@@ -8,20 +8,23 @@
         "${mod_author}"
     ],
     "contact": {
-        "homepage": "https://fabricmc.net/",
+        "homepage": "https://www.curseforge.com/minecraft/mc-mods/syconns-super-hero-mod",
         "sources": "https://github.com/FabricMC/fabric-example-mod"
     },
     "license": "${license}",
-    "icon": "${mod_id}.png",
+    "icon": "hero.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-          "mod.syconn.hero.HeroCore"
+            "mod.syconn.hero.HeroFabric"
+        ],
+        "client": [
+            "mod.syconn.hero.FabricClient"
         ]
     },
     "mixins": [
-        "${mod_id}.mixins.json",
-        "${mod_id}.fabric.mixins.json"
+        "hero.mixins.json",
+        "hero.fabric.mixins.json"
     ],
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",
