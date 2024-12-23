@@ -1,4 +1,4 @@
-package mod.syconn.hero.platform.services;
+package mod.syconn.hero.extra.platform.services;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;

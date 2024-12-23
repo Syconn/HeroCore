@@ -15,8 +15,4 @@ public class CommonDatapack {
 
     public static RegistrySetBuilder COMMON = new RegistrySetBuilder().add(Registries.DAMAGE_TYPE, bootstrap ->
             bootstrap.register(DamageSources.MJOLNIR, new DamageType("mjolnir", DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT, DeathMessageType.DEFAULT)));
-
-    public static <T> void addAll(BiConsumer<ResourceKey<T>, T> add) {
-        add.accept((ResourceKey<T>) DamageSources.MJOLNIR, (T) new DamageType("mjolnir", DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f, DamageEffects.HURT, DeathMessageType.DEFAULT));
-    }
 }

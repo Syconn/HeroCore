@@ -25,5 +25,9 @@ public class LangGen extends LanguageProvider {
         add(INGOT_TIN.get(), "Tin Ingot");
         add(TITANIUM_PLATE.get(), "Titanium Plate");
         add(ARC_REACTOR.get(), "Arc Reactor");
+        add("key.categories.hero", "HeroCore Controls");
+        add("key.hero.use.ability1", "Use Ability 1");
+        add("key.hero.use.ability2", "Use Ability 2");
+        add("key.hero.use.ability3", "Use Ability 3");
     }
 }

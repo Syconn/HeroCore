@@ -2,7 +2,7 @@ package mod.syconn.hero.registrar;
 
 import mod.syconn.hero.Constants;
 import mod.syconn.hero.entity.ThrownMjolnir;
-import mod.syconn.hero.platform.Services;
+import mod.syconn.hero.extra.platform.Services;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;

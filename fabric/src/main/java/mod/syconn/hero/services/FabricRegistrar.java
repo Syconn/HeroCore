@@ -1,7 +1,7 @@
 package mod.syconn.hero.services;
 
 import mod.syconn.hero.Constants;
-import mod.syconn.hero.platform.services.IRegistrar;
+import mod.syconn.hero.extra.platform.services.IRegistrar;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;

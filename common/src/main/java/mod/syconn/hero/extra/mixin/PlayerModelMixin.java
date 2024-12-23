@@ -1,4 +1,4 @@
-package mod.syconn.hero.mixin;
+package mod.syconn.hero.extra.mixin;
 
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;

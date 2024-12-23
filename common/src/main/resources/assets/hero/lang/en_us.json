@@ -10,5 +10,9 @@
   "item.hero.repulsor": "Iron Man Gauntlet",
   "item.hero.shuriken": "Shuriken",
   "item.hero.titanium_plate": "Titanium Plate",
-  "itemGroup.hero.hero_items": "Super Hero Gear"
+  "itemGroup.hero.hero_items": "Super Hero Gear",
+  "key.categories.hero": "HeroCore Controls",
+  "key.hero.use.ability1": "Use Ability 1",
+  "key.hero.use.ability2": "Use Ability 2",
+  "key.hero.use.ability3": "Use Ability 3"
 }
