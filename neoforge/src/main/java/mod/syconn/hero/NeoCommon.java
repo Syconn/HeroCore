@@ -2,6 +2,7 @@ package mod.syconn.hero;
 
 import mod.syconn.hero.client.ClientHandler;
 import mod.syconn.hero.common.CommonHandler;
+import mod.syconn.hero.extra.core.Events;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
@@ -15,10 +16,10 @@ public class NeoCommon {
     }
 
     @SubscribeEvent
-    public static void onFallEvent(LivingFallEvent pEvent) {
-        CommonEvent<LivingEntity, Float, Float, Boolean> commonEvent = CommonHandler.fallDamageEvent(pEvent.getEntity(), pEvent.getDistance(), pEvent.getDamageMultiplier(), false);
-        pEvent.setDistance(commonEvent.getP2());
-        pEvent.setDamageMultiplier(commonEvent.getP3());
-        pEvent.setCanceled(commonEvent.getResult());
+    public static void onFallEvent(LivingFallEvent event) {
+        Events.LivingEntityFallEvent result = CommonHandler.playerFallEvent(new Events.LivingEntityFallEvent(event.getEntity(), event.getDistance(), event.getDamageMultiplier(), false));
+        event.setDistance(result.distance());
+        event.setDamageMultiplier(result.damageMultiplier());
+        event.setCanceled(result.cancel());
     }
 }
