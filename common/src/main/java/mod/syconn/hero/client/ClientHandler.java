@@ -1,11 +1,7 @@
 package mod.syconn.hero.client;
 
 import mod.syconn.hero.client.render.entity.MjolnirRenderer;
-import mod.syconn.hero.network.Network;
-import mod.syconn.hero.network.messages.MessageLaunch;
 import mod.syconn.hero.registrar.EntityRegistrar;
-import mod.syconn.hero.util.Helper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
@@ -23,8 +19,14 @@ public class ClientHandler {
     }
 
     public static void onClientPlayerTick(Player player) {
-        if (Minecraft.getInstance().options.keyJump.isDown() && Helper.isWearingIronManSuit(player)) {
-            Network.sendToServer(new MessageLaunch(false));
-        }
+        handleMappings(player);
+            
+//        if (Minecraft.getInstance().options.keyJump.isDown() && Helper.isWearingIronManSuit(player)) {
+//            Network.sendToServer(new MessageLaunch(false));
+//        }
+    }
+    
+    private static void handleMappings(Player player) {
+        
     }
 }

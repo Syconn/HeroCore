@@ -1,7 +1,6 @@
 package mod.syconn.hero.mixin;
 
 import mod.syconn.hero.events.LivingEntityEvents;
-import mod.syconn.hero.util.CommonEvent;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;

@@ -1,4 +1,4 @@
-package mod.syconn.hero.network.messages;
+package mod.syconn.hero.extra.core;
 
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

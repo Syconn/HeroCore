@@ -1,6 +1,5 @@
 package mod.syconn.hero.events;
 
-import mod.syconn.hero.util.CommonEvent;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.world.entity.LivingEntity;

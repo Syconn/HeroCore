@@ -1,21 +1,30 @@
 package mod.syconn.hero.services;
 
 import mod.syconn.hero.Constants;
+import mod.syconn.hero.extra.core.IMenuData;
 import mod.syconn.hero.network.Network;
-import mod.syconn.hero.platform.services.INetwork;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import mod.syconn.hero.extra.platform.services.INetwork;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.network.ChannelBuilder;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.SimpleChannel;
+import net.minecraftforge.network.*;
+
+import java.util.OptionalInt;
 
 public class ForgeNetwork implements INetwork {
 
     public static final SimpleChannel CHANNEL = ChannelBuilder.named(ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, "network")).networkProtocolVersion(1).simpleChannel();
 
+    public <D extends IMenuData<D>> OptionalInt openMenuWithData(ServerPlayer player, MenuProvider provider, D data) {
+        AbstractContainerMenu oldMenu = player.containerMenu;
+        player.openMenu(provider, buf -> data.codec().encode(RegistryFriendlyByteBuf.decorator(player.level().registryAccess()).apply(buf), data));
+        AbstractContainerMenu newMenu = player.containerMenu;
+        return oldMenu != newMenu ? OptionalInt.of(player.containerCounter) : OptionalInt.empty();
+    }
+    
     public void sendToServer(Object payload) {
         CHANNEL.send(payload, PacketDistributor.SERVER.noArg());
     }
@@ -30,6 +39,10 @@ public class ForgeNetwork implements INetwork {
 
     public <T> void registerPlayC2S(Network.PlayMessage<T> message) {
         CHANNEL.messageBuilder(message.msgClass(), NetworkDirection.PLAY_TO_SERVER).codec(message.forgeCodec()).consumerMainThread((payload, context) -> message.handler().accept(payload, context.getSender())).add();
+    }
+
+    public <T> void registerPlayBiDirectional(Network.PlayMessage<T> message) {
+        CHANNEL.messageBuilder(message.msgClass(), NetworkProtocol.PLAY).codec(message.forgeCodec()).consumerMainThread((payload, context) -> message.handler().accept(payload, context.getSender())).add();
     }
 
     public static void setupNetwork(FMLCommonSetupEvent event) {

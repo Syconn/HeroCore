@@ -2,7 +2,6 @@ package mod.syconn.hero;
 
 import mod.syconn.hero.client.ClientHandler;
 import mod.syconn.hero.common.CommonHandler;
-import mod.syconn.hero.util.CommonEvent;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;

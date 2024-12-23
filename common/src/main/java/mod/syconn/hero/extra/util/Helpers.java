@@ -1,4 +1,4 @@
-package mod.syconn.hero.util;
+package mod.syconn.hero.extra.util;
 
 import mod.syconn.hero.registrar.ItemRegistrar;
 import net.minecraft.core.NonNullList;
@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public class Helper {
+public class Helpers {
 
     public static boolean isWearingIronManSuit(Player player) {
         NonNullList<ItemStack> inv = player.getInventory().armor;

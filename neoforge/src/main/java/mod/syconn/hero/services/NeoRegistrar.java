@@ -1,7 +1,7 @@
 package mod.syconn.hero.services;
 
 import mod.syconn.hero.HeroNeo;
-import mod.syconn.hero.platform.services.IRegistrar;
+import mod.syconn.hero.extra.platform.services.IRegistrar;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
