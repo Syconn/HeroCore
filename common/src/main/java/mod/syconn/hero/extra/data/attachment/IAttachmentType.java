@@ -9,10 +9,12 @@ import net.minecraft.world.entity.player.Player;
 
 public interface IAttachmentType<T> {
     
-    String id();
     Codec<T> codec();
     CompoundTag writeSyncedData();
-    T readSyncedData(T attachment, CompoundTag nbt);
+    T readSyncedData(CompoundTag nbt);
+    default String id() {
+        return getClass().getSimpleName().toLowerCase();
+    }
     default boolean copyOnDeath() {
         return true;
     }

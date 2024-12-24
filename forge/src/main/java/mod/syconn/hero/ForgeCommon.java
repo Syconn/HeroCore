@@ -3,7 +3,6 @@ package mod.syconn.hero;
 import mod.syconn.hero.client.ClientHandler;
 import mod.syconn.hero.common.CommonHandler;
 import mod.syconn.hero.extra.core.Events;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

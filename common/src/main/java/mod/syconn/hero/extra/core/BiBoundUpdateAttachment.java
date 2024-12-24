@@ -13,6 +13,6 @@ public record BiBoundUpdateAttachment(String id, CompoundTag tag) {
             ByteBufCodecs.STRING_UTF8, BiBoundUpdateAttachment::id, ByteBufCodecs.COMPOUND_TAG, BiBoundUpdateAttachment::tag, BiBoundUpdateAttachment::new);
 
     public static void handle(BiBoundUpdateAttachment message, Player player) {
-        Services.ATTACHED_DATA.update(message.id, data -> data.readSyncedData(data, message.tag), player);
+        Services.ATTACHED_DATA.set(message.id, Services.ATTACHED_DATA.get(message.id, player).readSyncedData(message.tag), player);
     }
 }

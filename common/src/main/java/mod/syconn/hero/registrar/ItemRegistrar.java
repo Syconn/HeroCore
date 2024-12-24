@@ -1,8 +1,8 @@
 package mod.syconn.hero.registrar;
 
 import mod.syconn.hero.Constants;
-import mod.syconn.hero.item.MjolnirItem;
 import mod.syconn.hero.extra.platform.Services;
+import mod.syconn.hero.item.MjolnirItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;

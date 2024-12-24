@@ -1,7 +1,11 @@
 package mod.syconn.hero.client;
 
 import mod.syconn.hero.client.render.entity.MjolnirRenderer;
+import mod.syconn.hero.client.screen.AbilityScreen;
+import mod.syconn.hero.extra.platform.Services;
+import mod.syconn.hero.registrar.DataAttachments;
 import mod.syconn.hero.registrar.EntityRegistrar;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
@@ -27,6 +31,6 @@ public class ClientHandler {
     }
     
     private static void handleMappings(Player player) {
-        
+        if (Keys.ABILITIES_MENU.consumeClick()) Minecraft.getInstance().setScreen(new AbilityScreen(player, Services.ATTACHED_DATA.get(DataAttachments.SUPER_POWER, player)));
     }
 }

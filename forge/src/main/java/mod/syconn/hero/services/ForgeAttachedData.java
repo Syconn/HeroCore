@@ -1,7 +1,8 @@
 package mod.syconn.hero.services;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import mod.syconn.hero.capabilities.SuperPowerProvider;
 import mod.syconn.hero.extra.data.attachment.IAttachmentType;
+import mod.syconn.hero.extra.data.attachment.SuperPower;
 import mod.syconn.hero.extra.platform.services.IAttachedData;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
@@ -16,11 +17,11 @@ public class ForgeAttachedData implements IAttachedData { // TODO HARD CODED CUR
     private static final Map<Class<?>, Capability<?>> registrar = new HashMap<>();
 
     public <T extends IAttachmentType<T>> String registerType(String id, Supplier<T> typeSupplier) {
-//        registrar.put(SpaceSuit.class, SpaceSuitProvider.SPACE_SUIT);
+        registrar.put(SuperPower.class, SuperPowerProvider.SUPER_POWER);
         return id;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("all")
     public <T extends IAttachmentType<T>> T get(String id, Player player) {
         return (T) player.getCapability(getCapability(id)).orElse(null);
     }

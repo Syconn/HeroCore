@@ -2,10 +2,10 @@ package mod.syconn.hero.network;
 
 import mod.syconn.hero.Constants;
 import mod.syconn.hero.extra.core.BiBoundUpdateAttachment;
-import mod.syconn.hero.network.messages.MessageLaunch;
 import mod.syconn.hero.extra.core.Payload;
 import mod.syconn.hero.extra.platform.Services;
 import mod.syconn.hero.extra.platform.services.INetwork;
+import mod.syconn.hero.network.messages.MessageLaunch;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.PacketFlow;

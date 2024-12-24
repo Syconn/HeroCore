@@ -29,5 +29,7 @@ public class LangGen extends LanguageProvider {
         add("key.hero.use.ability1", "Use Ability 1");
         add("key.hero.use.ability2", "Use Ability 2");
         add("key.hero.use.ability3", "Use Ability 3");
+        add("key.hero.menu.abilities", "Open Abilities Menu");
+        add("hero.ability.screen", "Ability Menu");
     }
 }
